@@ -1,5 +1,12 @@
 # developingdataproductsweek4
 
+This is my Week 4 Project for the Developing Data Products class through Coursera. You can find the required links directly below as well as the assignment guidelines.
+
+Shiny app link: https://lzcathcart.shinyapps.io/developingdataproductsweek4/
+Rpres link: 
+
+
+Assignment Guidelines
 This peer assessed assignment has two parts. First, you will create a Shiny application and deploy it on Rstudio's servers. Second, you will use Slidify or Rstudio Presenter to prepare a reproducible pitch presentation about your application.
 
 Your Shiny Application
