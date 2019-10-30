@@ -1,0 +1,61 @@
+Developing Data Products Course Project
+========================================================
+author: Linda Zahora-Cathcart   
+date: `r date()`
+autosize: true
+transition: rotate
+
+Introduction
+========================================================
+
+Demographics across the United States vary greatly from state to state, and even within a state's counties. For this project, the Midwest dataset was used to dive deeper into the demographics within the state of Indiana. 
+
+- All age groups were included
+- Population: Total population is based on each county 
+- Races: Black, White, American Indian, Asian, and Other
+
+The accompanying shiny app allows the user to select a county in Indiana which then displays a plot of the total count of races for that particular county. Each race is demonstrated with a different bar and color.
+
+Documentation
+========================================================
+
+Below you will find a summary of the Midwest dataset that was used prior to subsetting for just Indiana. It features the six relevant columns that were used.
+```{r}
+library(ggplot2)
+data("midwest")
+str(midwest[,c(2,7:11)])
+```
+
+Summary Plot
+========================================================
+
+This is the "proof of concept" summary plot that uses one county from the Midwest dataset. As you can see, each variable has been constructed to fit on the x axis with it's population value on the y axis. 
+```{r, echo=FALSE}
+indiana <- subset(midwest, midwest$state == "IN")
+        indiana[,2] <- lapply(indiana[,2], as.factor)
+        
+adams <- subset(indiana, indiana$county == "ADAMS")
+
+df <- data.frame(adams$popwhite, adams$popblack, adams$popamerindian, 
+                 adams$popasian, adams$popother, adams$county)
+
+# melt your data.frame
+library(reshape2)
+df <- melt(df, id.vars='adams.county')
+
+# ggplot 
+library(ggplot2)
+adamsPlot <- ggplot(df, aes(x=adams.county, y=value, fill=variable)) + geom_bar(stat='identity')
+
+adamsPlot <- ggplot(df, aes(x=adams.county, y=value, fill=variable)) + 
+                geom_bar(stat='identity', position='dodge')
+
+adamsPlot
+```
+Links
+========================================================
+
+
+Shiny App: https://lzcathcart.shinyapps.io/developingdataproductsweek4/ 
+
+Source Code: https://github.com/lzcathcart/developingdataproductsweek4
